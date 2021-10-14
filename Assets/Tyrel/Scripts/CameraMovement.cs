@@ -91,13 +91,15 @@ public class CameraMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Fruit")
+        if (other.gameObject.tag == "Food")
         {
             Score++;
+            Destroy(other.gameObject);
         }
-        if (other.gameObject.tag == "Fast Food")
+        if (other.gameObject.tag == "FastFood")
         {
             health -= 1;
+            Destroy(other.gameObject);
         }
 
     }

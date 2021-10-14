@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Michael/Scenes/Menu.unity
     guid: efdd0bed8be48684eb18e2e2734ba501
   - enabled: 1
-    path: Assets/Scenes/Tyrel.unity
-    guid: 137d2e8c63dd57c4da378b4bf0cff0be
+    path: Assets/Tyrel/FurutsuVsHanbaga.unity
+    guid: ef03d50b85639c044b15064c2a3df8a4
   m_configObjects: {}
