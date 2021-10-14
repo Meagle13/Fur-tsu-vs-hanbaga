@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RayCastShootComplete : MonoBehaviour {
+public class RayCastShoot : MonoBehaviour {
 
 	public int gunDamage = 1;											
 	public float fireRate = 0.25f;										
@@ -32,7 +32,7 @@ public class RayCastShootComplete : MonoBehaviour {
 	void Update () 
 	{
 		
-		if (Input.GetButtonDown("Fire1") && Time.time > nextFire) 
+		if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextFire) 
 		{
 			
 			nextFire = Time.time + fireRate;
@@ -50,23 +50,16 @@ public class RayCastShootComplete : MonoBehaviour {
 
 				laserLine.SetPosition (1, hit.point);
 
+				if(hit.collider.tag == "Food")
+                {
+					Destroy(hit.collider.gameObject);
+                }
 
-				
 
-				ShootableBox health = hit.collider.GetComponent<ShootableBox>();
-
-				if (health != null)
-				{
-					health.Damage (gunDamage);
-				}
-
-				if (hit.rigidbody != null)
-				{
-					hit.rigidbody.AddForce (-hit.normal * hitForce);
-				}
 			}
 			else
 			{
+				
                 laserLine.SetPosition (1, rayOrigin + (fpsCam.transform.forward * weaponRange));
 			}
 		}

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - FastFood
+  - Undefined
+  - Food
   layers:
   - Default
   - TransparentFX
