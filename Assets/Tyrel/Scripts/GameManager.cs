@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public float speed = 25f;
     public float velocity = 500f;
 
-    
+    int foodSize = 0;
     public Text score = null;
     public List<GameObject> foodStore = new List<GameObject>();
     public int maxFood = 0;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dir = player.transform.position - transform.position;
+        dir = player.transform.position - spawner1.transform.position;
         dir2 = player.transform.position - spawner2.transform.position;
         dir3 = player.transform.position - spawner3.transform.position;
         score.enabled = true;
@@ -52,11 +52,13 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (maxFood < 20)
+        if (maxFood < 1)
         {
             SpawnFood();
             maxFood++;
+            
         }
+
         
 
         if (cameraPlayer.health <= 0)
@@ -67,29 +69,70 @@ public class GameManager : MonoBehaviour
         
     }
 
+    void Spawner2()
+    {
+        GameObject food = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawner2.transform.position, transform.rotation);
+        foodStore.Add(food);
+
+        food.GetComponent<Rigidbody>().AddForce(dir2 * speed + Vector3.up * velocity);
+    }
+
+    void Spawner1()
+    {
+        GameObject food = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawner1.transform.position, transform.rotation);
+        foodStore.Add(food);
+
+        food.GetComponent<Rigidbody>().AddForce(dir * speed + Vector3.up * velocity);
+    }
+
     void SpawnFood()
     {
-
+        if (foodSize <= 20)
+        {
+            StartCoroutine(FoodRate());
+        }
+        else if (foodSize > 20)
+        {
+            StartCoroutine(FasterFoodRate());
+        }
+        
     }
-    
 
+    IEnumerator FasterFoodRate()
+    {
+        yield return new WaitForSeconds(.5f);
+        var Spawn = Random.value;
+
+        if (Spawn < 0.5)
+        {
+            Spawner1();
+        }
+        else
+        {
+            Spawner2();
+        }
+
+        foodSize++;
+        maxFood = 0;
+    }
 
     IEnumerator FoodRate()
     {
 
-        yield return new WaitForSeconds(2f);
-        //for (foodStore < 10)
-        //{
+        yield return  new WaitForSeconds(2f);
+        var Spawn = Random.value;
 
-        //}
-        GameObject food = Instantiate(projectiles[Random.Range(0, projectiles.Length)], Spawners[Random.Range(0, Spawners.Length)].transform.position, transform.rotation);
-        foodStore.Add(food);
-        //if(foodStore = 20)
-        //{
+        if (Spawn < 0.5)
+        {
+            Spawner1();
+        }
+        else
+        {
+            Spawner2();
+        }
 
-        //}
-        food.GetComponent<Rigidbody>().AddForce(dir2 * speed);
-
+        foodSize++;
+        maxFood = 0;
     }
     
 }

@@ -2,20 +2,18 @@
 using System.Collections;
 
 public class RayCastShoot : MonoBehaviour {
-
-	public int gunDamage = 1;											
+										
 	public float fireRate = 0.25f;										
-	public float weaponRange = 50f;										
-	public float hitForce = 100f;										
+	public float weaponRange = 50f;																			
 	public Transform gunEnd;											
 
 	private Camera fpsCam;												
 	private WaitForSeconds shotDuration = new WaitForSeconds(0.07f);	
 	private AudioSource gunAudio;										
 	private LineRenderer laserLine;										
-	private float nextFire;												
+	private float nextFire;
 
-
+    public CameraMovement cam = null;
 	void Start () 
 	{
 		
@@ -26,6 +24,8 @@ public class RayCastShoot : MonoBehaviour {
 
 		
 		fpsCam = GetComponentInParent<Camera>();
+
+        cam.GetComponent<CameraMovement>();
 	}
 	
 
@@ -34,7 +34,14 @@ public class RayCastShoot : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextFire) 
 		{
-			
+            if (cam.Score < 20)
+            {
+                fireRate = 0.25f;
+            }
+            else
+            {
+                fireRate = 0.1f;
+            }
 			nextFire = Time.time + fireRate;
 
             StartCoroutine (ShotEffect());
@@ -55,8 +62,11 @@ public class RayCastShoot : MonoBehaviour {
 					Destroy(hit.collider.gameObject);
                 }
 
-
-			}
+                if (hit.collider.tag == "FastFood")
+                {
+                    Destroy(hit.collider.gameObject);
+                }
+            }
 			else
 			{
 				
