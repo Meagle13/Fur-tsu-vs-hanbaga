@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class CameraMovement : MonoBehaviour
 {
+
+    public AudioSource aSource = null;
+
+    public AudioClip[] aClip = null;
     
     public enum RotationAxes { MouseXAndY = 0}
     public RotationAxes axes = RotationAxes.MouseXAndY;
@@ -25,6 +30,9 @@ public class CameraMovement : MonoBehaviour
 
     public float Score = 0;
     public float health = 3;
+    public Image hurt1 = null;
+    public Text plusOne = null;
+    Vector3 onePos = Vector3.zero;
 
     void Start()
     {
@@ -34,6 +42,9 @@ public class CameraMovement : MonoBehaviour
         originalRotation = transform.localRotation;
 
         Cursor.visible = false;
+        hurt1.enabled = false;
+        plusOne.enabled = false;
+        onePos = plusOne.transform.position;
     }
 
     void Update()
@@ -56,6 +67,7 @@ public class CameraMovement : MonoBehaviour
             if (rotArrayY.Count >= frameCounter)
             {
                 rotArrayY.RemoveAt(0);
+                
             }
             if (rotArrayX.Count >= frameCounter)
             {
@@ -93,15 +105,33 @@ public class CameraMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Food")
         {
+            StartCoroutine(PlusOne());
             Score++;
+            PlayAudioCrunch();
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "FastFood")
         {
+            hurt1.enabled = true;
+            
             health -= 1;
+            PlayAudioHit();
             Destroy(other.gameObject);
         }
 
+    }
+
+    void PlayAudioCrunch()
+    {
+        
+        aSource.clip = aClip[0];
+        aSource.Play();
+    }
+
+    void PlayAudioHit()
+    {
+        aSource.clip = aClip[1];
+        aSource.Play();
     }
 
     public static float ClampAngle(float angle, float min, float max)
@@ -119,5 +149,16 @@ public class CameraMovement : MonoBehaviour
             }
         }
         return Mathf.Clamp(angle, min, max);
+    }
+
+    IEnumerator PlusOne()
+    {
+        plusOne.enabled = true;
+        
+        plusOne.transform.position +=  Vector3.up * 5 * Time.deltaTime;
+
+        yield return new WaitForSeconds(1f);
+        plusOne.enabled = false;
+        plusOne.transform.position = onePos;
     }
 }

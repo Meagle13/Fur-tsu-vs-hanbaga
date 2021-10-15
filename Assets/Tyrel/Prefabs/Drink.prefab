@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091895453072007327}
   - component: {fileID: 9079167559556487213}
-  - component: {fileID: 8888288766140535259}
+  - component: {fileID: 7364306796122503051}
   m_Layer: 0
   m_Name: Drink
   m_TagString: FastFood
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.027327782, y: 0.059655942, z: 0.023703856}
   m_Center: {x: 0.002146578, y: 0.033227056, z: 0.00040427744}
---- !u!54 &8888288766140535259
+--- !u!54 &7364306796122503051
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1816221131735642447}
   - component: {fileID: 4526245404890219909}
   - component: {fileID: 3442967986859153423}
-  - component: {fileID: -5997201560625354311}
+  - component: {fileID: -6863799733538242642}
   m_Layer: 0
   m_Name: Banana
   m_TagString: Food
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06631723, y: 0.027390135, z: 0.009077848}
   m_Center: {x: 0.0004316736, y: 0.00903239, z: 0}
---- !u!54 &-5997201560625354311
+--- !u!54 &-6863799733538242642
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
