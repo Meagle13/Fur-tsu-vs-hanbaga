@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7453161298266180171}
   - component: {fileID: 1020939163737154314}
-  - component: {fileID: 3474135410296520702}
+  - component: {fileID: 199377623344857911}
   m_Layer: 0
   m_Name: Fries
   m_TagString: FastFood
@@ -209,7 +209,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.041152544, y: 0.049687643, z: 0.026062882}
   m_Center: {x: 0.00022552312, y: 0.034943644, z: 0.0018713896}
---- !u!54 &3474135410296520702
+--- !u!54 &199377623344857911
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

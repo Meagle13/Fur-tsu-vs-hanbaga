@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
 
     Vector3 dir = Vector3.zero;
     Vector3 dir2 = Vector3.zero;
-    Vector3 dir3 = Vector3.zero;
+    
 
     public float speed = 25f;
     public float velocity = 500f;
+    public float velocity2 = 482f;
 
     int foodSize = 0;
     public Text score = null;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         dir = player.transform.position - spawner1.transform.position;
         dir2 = player.transform.position - spawner2.transform.position;
-        dir3 = player.transform.position - spawner3.transform.position;
+        
         score.enabled = true;
         cameraPlayer.GetComponent<CameraMovement>();
         
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject food = Instantiate(projectiles[Random.Range(0, projectiles.Length)], Spawners[Random.Range(0, Spawners.Length)].transform.position, transform.rotation);
 
-            food.GetComponent<Rigidbody>().AddForce(dir * speed + Vector3.up * velocity);
+            food.GetComponent<Rigidbody>().AddForce(dir * speed );
 
         }
 
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
         foodStore.Add(food);
 
         food.GetComponent<Rigidbody>().AddForce(dir2 * speed + Vector3.up * velocity);
+        //food.transform.position += player.transform.position * 25 * Time.deltaTime;
     }
 
     void Spawner1()
@@ -82,7 +84,9 @@ public class GameManager : MonoBehaviour
         GameObject food = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawner1.transform.position, transform.rotation);
         foodStore.Add(food);
 
-        food.GetComponent<Rigidbody>().AddForce(dir * speed + Vector3.up * velocity);
+        food.GetComponent<Rigidbody>().AddForce(dir * speed + Vector3.up * velocity2);
+
+        //food.transform.position += player.transform.position * 25 * Time.deltaTime;
     }
 
     void SpawnFood()

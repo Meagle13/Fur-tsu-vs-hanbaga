@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8548571904570452658}
   - component: {fileID: 5856464655234276984}
   - component: {fileID: 8648399991441088773}
-  - component: {fileID: 980223405634067158}
+  - component: {fileID: -7772223054376245569}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Food
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.020000003, y: 0.018209208, z: 0.020000005}
   m_Center: {x: 0.0000000013969839, y: -0.0005794391, z: -0.0000000018626451}
---- !u!54 &980223405634067158
+--- !u!54 &-7772223054376245569
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
