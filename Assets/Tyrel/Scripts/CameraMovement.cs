@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
     public AudioSource aSource = null;
 
     public AudioClip[] aClip = null;
-    
+    public CameraShake cameraShake = null;
     public enum RotationAxes { MouseXAndY = 0}
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
@@ -30,7 +30,9 @@ public class CameraMovement : MonoBehaviour
 
     public float Score = 0;
     public float health = 3;
+    public Text healthtext = null;
     public Image hurt1 = null;
+    public Image hurt2 = null;
     public Text plusOne = null;
     Vector3 onePos = Vector3.zero;
 
@@ -43,12 +45,28 @@ public class CameraMovement : MonoBehaviour
 
         Cursor.visible = false;
         hurt1.enabled = false;
+        hurt2.enabled = false;
         plusOne.enabled = false;
         onePos = plusOne.transform.position;
+        
     }
 
     void Update()
     {
+        healthtext.text = health + "";
+        if (health == 2)
+        {
+            hurt1.enabled = true;
+        }
+        else if(health == 1)
+        {
+            hurt2.enabled = true;
+        }
+        if(Score >= 20)
+        {
+            health += 1;
+        }
+
         if (axes == RotationAxes.MouseXAndY)
         {
             //Resets the average rotation
@@ -112,7 +130,8 @@ public class CameraMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "FastFood")
         {
-            hurt1.enabled = true;
+            
+            
             
             health -= 1;
             PlayAudioHit();
